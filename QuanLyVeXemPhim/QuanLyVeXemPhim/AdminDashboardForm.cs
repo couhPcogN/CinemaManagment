@@ -15,7 +15,7 @@ namespace QuanLyVeXemPhim
             // Tạo đường dẫn đến các file dữ liệu
             string invoicePath = Path.Combine(Application.StartupPath, "invoices");
             string moviePath = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\DATA\movies.csv"));
-            string userPath = Path.Combine(Application.StartupPath, "DATA", "User.csv");
+            string userPath = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\DATA\User.csv")); 
 
             // Khởi tạo manager áp dụng OOP
             dashboardManager = new AdminDashboardManager(invoicePath, moviePath, userPath);
