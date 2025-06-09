@@ -1,0 +1,11 @@
+===== HÓA ĐƠN THANH TOÁN =====
+Tên phim: label3
+Thể loại: label4
+Thời lượng: label5
+Phòng chiếu: Phòng 1
+Suất chiếu: 12:00 – 14:30
+Ghế đã chọn: E07, G08
+Tiền ghế: 210,000 VND
+Tiền combo: 20,000 VND
+TỔNG CỘNG: 230,000 VND
+==============================

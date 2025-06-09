@@ -1,0 +1,11 @@
+===== HÓA ĐƠN THANH TOÁN =====
+Tên phim: label3
+Thể loại: label4
+Thời lượng: label5
+Phòng chiếu: Phòng 1
+Suất chiếu: 12:00 – 14:30
+Ghế đã chọn: C08, C09, F08, F09, G09, F10, G10, G08, G07, G06, G03, G04, G05, G02, G01, F01, F02, F03, F04, F06, F07, E06, E07, E08, D08, D07, D05, D04, E03, E02, E01, D02, D03, D01, C01, C02, C03, C04, C06, E05, C07, E09, D09, E10, D10, C10, B10, A10, A09, B09, B08, A08, A07, B07, B06, A06, A04, A05, B05, B04, A03, B02, B01, A01, A02
+Tiền ghế: 5,505,000 VND
+Tiền combo: 110,000 VND
+TỔNG CỘNG: 5,615,000 VND
+==============================
