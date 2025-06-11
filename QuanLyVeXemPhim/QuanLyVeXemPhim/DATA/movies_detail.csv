@@ -1,0 +1,5 @@
+﻿MovieID,MovieName,Genre,Duration,ShowDate,Room,Showtime
+M037,HEADER,Comedy,78,6/10/2025,Room 2,12:15 - 13:45
+M000,Hehehe,Comedy,88,6/10/2025,Room 1,09:45 - 11:15
+M038,Joke,Drama,99,6/10/2025,Room 4,15:30 - 17:00
+M002,Slient,Horror,90,6/11/2025,Room 3,11:00 - 12:30
