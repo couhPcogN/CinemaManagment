@@ -230,6 +230,7 @@ namespace QuanLyVeXemPhim
             Program.SelectedDuration = lblDurationValue.Text;
             Program.SelectedRoom = comboBoxRoom.SelectedItem?.ToString() ?? "";
             Program.SelectedShowtime = comboBoxShowtime.SelectedItem?.ToString() ?? "";
+            Program.SelectedShowDate = dtpShowDate.Value.ToShortDateString();
 
             // Ẩn form hiện tại
             this.Hide();
@@ -246,8 +247,11 @@ namespace QuanLyVeXemPhim
             }
 
             // Mở form chọn bắp và nước
-            FoodSelectionForm foodForm = new FoodSelectionForm(Program.SelectedSeatsGlobal);
-            foodForm.ShowDialog();
+            if (Program.SelectedSeatsGlobal != null && Program.SelectedSeatsGlobal.Count > 0)
+            {
+                FoodSelectionForm foodForm = new FoodSelectionForm(this, Program.SelectedSeatsGlobal);
+                foodForm.ShowDialog();
+            }
 
             // Mở lại dashboard
             this.Show();

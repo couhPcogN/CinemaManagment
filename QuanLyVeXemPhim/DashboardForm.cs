@@ -105,6 +105,7 @@ namespace QuanLyVeXemPhim
                 comboBoxShowtime.Items.Clear();
                 comboBoxShowtime.Items.AddRange(new string[]
                  {
+                            "09:45 - 11:00",
                             "10:00 - 12:00",
                             "12:30 - 14:30",
                             "15:00 - 17:00",
@@ -131,7 +132,21 @@ namespace QuanLyVeXemPhim
                 dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             }
         }
-
+        private bool IsShowtimeInFuture(string showDate, string showtime)
+        {
+            try
+            {
+                DateTime date = DateTime.Parse(showDate);
+                string startTimeStr = showtime.Split('-')[0].Trim();
+                DateTime startTime = DateTime.Parse(startTimeStr);
+                DateTime showStart = new DateTime(date.Year, date.Month, date.Day, startTime.Hour, startTime.Minute, 0);
+                return DateTime.Now <= showStart; // Chỉ cho đặt nếu giờ hiện tại <= giờ bắt đầu suất chiếu
+            }
+            catch
+            {
+                return false;
+            }
+        }
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -230,26 +245,30 @@ namespace QuanLyVeXemPhim
             Program.SelectedDuration = lblDurationValue.Text;
             Program.SelectedRoom = comboBoxRoom.SelectedItem?.ToString() ?? "";
             Program.SelectedShowtime = comboBoxShowtime.SelectedItem?.ToString() ?? "";
+            Program.SelectedShowDate = dtpShowDate.Value.ToShortDateString();
+
+            // Kiểm tra suất chiếu có hợp lệ không
+            if (!IsShowtimeInFuture(Program.SelectedShowDate, Program.SelectedShowtime))
+            {
+                MessageBox.Show("Không thể đặt vé cho suất chiếu đã qua!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             // Ẩn form hiện tại
             this.Hide();
 
-            // Mở form chọn ghế
-            SeatSelectionForm seatForm = new SeatSelectionForm();
+            // Mở form chọn ghế (dùng ShowDialog để kiểm soát luồng)
+            SeatSelectionForm seatForm = new SeatSelectionForm(this);
             seatForm.ShowDialog();
 
-            // Sau khi chọn ghế xong, gán danh sách ghế mẫu vào (nếu có)
-            if (Program.SelectedSeatsGlobal == null || Program.SelectedSeatsGlobal.Count == 0)
+            // Sau khi SeatSelectionForm đóng, kiểm tra nếu đã chọn ghế thì mới mở FoodSelectionForm
+            if (Program.SelectedSeatsGlobal != null && Program.SelectedSeatsGlobal.Count > 0)
             {
-                // Ví dụ mẫu (có thể bỏ nếu bạn đã truyền ghế từ SeatSelectionForm)
-                Program.SelectedSeatsGlobal = new List<string> { "B03", "C05", "D06", "E04", "F05" };
+                FoodSelectionForm foodForm = new FoodSelectionForm(this, Program.SelectedSeatsGlobal);
+                foodForm.ShowDialog();
             }
 
-            // Mở form chọn bắp và nước
-            FoodSelectionForm foodForm = new FoodSelectionForm(Program.SelectedSeatsGlobal);
-            foodForm.ShowDialog();
-
-            // Mở lại dashboard
+            // Hiện lại DashboardForm sau khi các form con đã đóng
             this.Show();
         }
 
@@ -258,9 +277,8 @@ namespace QuanLyVeXemPhim
             if (DialogResult.Yes == MessageBox.Show("Bạn có chắc muốn đăng xuất không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
 
-                LoginForm loginForm = new LoginForm();
-                loginForm.Show(); // Hiển thị lại form LoginForm
-                this.Hide(); // Ẩn form 
+                Program.CurrentRole = string.Empty;
+                this.Close();
             }
         }
 

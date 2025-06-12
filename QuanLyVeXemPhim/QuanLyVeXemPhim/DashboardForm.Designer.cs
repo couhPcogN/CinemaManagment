@@ -51,6 +51,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnback = new System.Windows.Forms.Button();
+            this.dtpShowDate = new System.Windows.Forms.DateTimePicker();
+            this.lblShowDate = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSearch)).BeginInit();
@@ -326,6 +328,24 @@
             this.btnback.UseVisualStyleBackColor = false;
             this.btnback.Click += new System.EventHandler(this.btnback_Click);
             // 
+            // dtpShowDate
+            // 
+            this.dtpShowDate.Font = new System.Drawing.Font("Comic Sans MS", 10F);
+            this.dtpShowDate.Location = new System.Drawing.Point(900, 180);
+            this.dtpShowDate.Name = "dtpShowDate";
+            this.dtpShowDate.Size = new System.Drawing.Size(180, 35);
+            this.dtpShowDate.TabIndex = 21;
+            // 
+            // lblShowDate
+            // 
+            this.lblShowDate.AutoSize = true;
+            this.lblShowDate.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold);
+            this.lblShowDate.Location = new System.Drawing.Point(800, 180);
+            this.lblShowDate.Name = "lblShowDate";
+            this.lblShowDate.Size = new System.Drawing.Size(90, 29);
+            this.lblShowDate.TabIndex = 20;
+            this.lblShowDate.Text = "Show Date:";
+            // 
             // DashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -351,6 +371,8 @@
             this.Controls.Add(this.picSearch);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.lblShowDate);
+            this.Controls.Add(this.dtpShowDate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -390,5 +412,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnback;
+        private System.Windows.Forms.DateTimePicker dtpShowDate;
+        private System.Windows.Forms.Label lblShowDate;
     }
 }

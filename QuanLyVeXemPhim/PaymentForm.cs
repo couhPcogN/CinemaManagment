@@ -22,7 +22,7 @@ namespace QuanLyVeXemPhim
         private Label lblTitle, lblSelectedSeats, lblPopcorn, lblPepsi, lblCoca, lblSprite, lblFoodTotal, lblGrandTotal;
         private Label lblQtyPopcorn, lblQtyPepsi, lblQtyCoca, lblQtySprite, lblComboTotal, lblAllTotal;
         private Button btnBack, btnConfirm;
-
+        private Form parentForm;
         private List<string> selectedSeats;
         private Dictionary<string, int> selectedFoods;
 
@@ -47,7 +47,7 @@ namespace QuanLyVeXemPhim
             {"Sprite", 20000}
         };
 
-        public PaymentForm(List<string> seatNames, Dictionary<string, int> foodSelected)
+        public PaymentForm(Form parent,List<string> seatNames, Dictionary<string, int> foodSelected)
         {
             this.FormBorderStyle = FormBorderStyle.None;
             this.Size = new Size(633, 567);
@@ -57,6 +57,7 @@ namespace QuanLyVeXemPhim
 
             selectedSeats = seatNames;
             selectedFoods = foodSelected;
+            parentForm = parent;
 
             InitializeUI();
             this.Load += PaymentForm_Load; // 👈 THÊM DÒNG NÀY
@@ -252,11 +253,41 @@ namespace QuanLyVeXemPhim
 
         private void BtnBack_Click(object sender, EventArgs e)
         {
+            FoodSelectionForm foodForm = new FoodSelectionForm(this, Program.SelectedSeatsGlobal);
+            foodForm.ShowDialog();
             this.Hide();
-            var foodForm = new FoodSelectionForm(Program.SelectedSeatsGlobal);
-            foodForm.Show();
         }
-
+        private void SaveBookedSeats()
+        {
+            try
+            {
+                string filePath = Path.Combine(Application.StartupPath, "DATA", "booked_seats.csv");
+                string directory = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+                // Tạo header nếu file chưa tồn tại
+                if (!File.Exists(filePath))
+                {
+                    File.WriteAllText(filePath, "MovieName,ShowDate,Room,Seat,Showtime\n");
+                }
+                // Lưu các ghế đã chọn
+                foreach (string seat in Program.SelectedSeatsGlobal)
+                {
+                    string line = $"{Program.SelectedMovieName}," +
+                                $"{Program.SelectedShowDate}," +
+                                $"{Program.SelectedRoom}," +
+                                $"{seat}," +
+                                $"{Program.SelectedShowtime}\n";
+                    File.AppendAllText(filePath, line);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu danh sách ghế đã đặt: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void BtnConfirmPayment_Click(object sender, EventArgs e)
         {
             int totalSeat = selectedSeats.Sum(seat => seatPrices[GetSeatType(seat)]);
@@ -266,7 +297,7 @@ namespace QuanLyVeXemPhim
             // Tích lũy điểm
             int newPoints = BuyerPoints + 1;
             string khuyenMai = "";
-            if (newPoints >= 10)
+            if (newPoints >= 3)
             {
                 khuyenMai = "\n*** Chúc mừng! Bạn đã nhận được 1 ly Pepsi miễn phí! ***\n";
                 newPoints = 0; // Reset điểm sau khi nhận quà
@@ -295,6 +326,7 @@ namespace QuanLyVeXemPhim
             string filePath = Path.Combine(invoiceDir, fileName);
 
             File.WriteAllText(filePath, invoice);
+            SaveBookedSeats();
 
             // Cập nhật lại điểm tích lũy cho user hiện tại
             Program.CurrentUserPoints = newPoints;

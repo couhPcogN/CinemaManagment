@@ -47,9 +47,10 @@ public class UserManager : IAccountManager
         foreach (var line in lines)
         {
             var parts = line.Split(',');
-            if (parts.Length == 3)
+            if (parts.Length >= 3)
             {
-                users.Add(new User(parts[0], parts[1], parts[2]));
+                int points = parts.Length > 3 ? int.Parse(parts[3]) : 0;
+                users.Add(new User(parts[0], parts[1], parts[2], points));
             }
         }
         return users;
@@ -58,8 +59,20 @@ public class UserManager : IAccountManager
     // Ghi danh sách user trở lại file CSV
     public void Save(List<User> users)
     {
-        var lines = new List<string> { "Username,Password,Role" };
-        lines.AddRange(users.Select(u => $"{u.Username},{u.Password},{u.Role}"));
+        var lines = new List<string> { "Username,Password,Role,Points" };
+        lines.AddRange(users.Select(u => $"{u.Username},{u.Password},{u.Role},{u.Points}"));
         File.WriteAllLines(filePath, lines);
+    }
+
+    // Cập nhật điểm thưởng cho user
+    public void UpdateUserPoints(string username, int newPoints)
+    {
+        var users = GetAll();
+        var target = users.FirstOrDefault(u => u.Username == username);
+        if (target != null)
+        {
+            target.Points = newPoints;
+            Save(users);
+        }
     }
 }

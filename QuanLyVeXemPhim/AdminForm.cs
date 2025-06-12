@@ -40,9 +40,8 @@ namespace QuanLyVeXemPhim
             if (DialogResult.Yes == MessageBox.Show("Bạn có chắc muốn đăng xuất không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
 
-               LoginForm loginForm = new LoginForm();
-                loginForm.Show(); // Hiển thị lại form LoginForm
-                this.Hide(); // Ẩn form AdminForm
+                Program.CurrentRole = string.Empty;
+                this.Close();
             }
         }
         private Form currentForm = null;

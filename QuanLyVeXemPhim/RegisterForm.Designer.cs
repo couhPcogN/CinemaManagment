@@ -30,7 +30,6 @@
         {
             this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.btnRegister = new System.Windows.Forms.Button();
             this.regShowPassword = new System.Windows.Forms.CheckBox();
             this.regPassword = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -42,6 +41,7 @@
             this.regcPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnSiginhere = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label5
@@ -70,23 +70,6 @@
             this.button2.Text = "SIGIN HERE";
             this.button2.UseVisualStyleBackColor = false;
             // 
-            // btnRegister
-            // 
-            this.btnRegister.BackColor = System.Drawing.Color.LightBlue;
-            this.btnRegister.FlatAppearance.BorderSize = 0;
-            this.btnRegister.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnRegister.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegister.Font = new System.Drawing.Font("Comic Sans MS", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegister.ForeColor = System.Drawing.Color.Black;
-            this.btnRegister.Location = new System.Drawing.Point(77, 490);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(350, 49);
-            this.btnRegister.TabIndex = 16;
-            this.btnRegister.Text = "REGISTER";
-            this.btnRegister.UseVisualStyleBackColor = false;
-            this.btnRegister.Click += new System.EventHandler(this.button1_Click);
-            // 
             // regShowPassword
             // 
             this.regShowPassword.AutoSize = true;
@@ -104,6 +87,7 @@
             this.regPassword.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.regPassword.Location = new System.Drawing.Point(77, 286);
             this.regPassword.Name = "regPassword";
+            this.regPassword.PasswordChar = '*';
             this.regPassword.Size = new System.Drawing.Size(350, 35);
             this.regPassword.TabIndex = 12;
             // 
@@ -172,6 +156,7 @@
             this.regcPassword.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.regcPassword.Location = new System.Drawing.Point(77, 387);
             this.regcPassword.Name = "regcPassword";
+            this.regcPassword.PasswordChar = '*';
             this.regcPassword.Size = new System.Drawing.Size(350, 35);
             this.regcPassword.TabIndex = 12;
             // 
@@ -203,17 +188,29 @@
             this.btnSiginhere.UseVisualStyleBackColor = false;
             this.btnSiginhere.Click += new System.EventHandler(this.btnSiginhere_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.LightBlue;
+            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(77, 485);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(350, 61);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "REGISTER";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(505, 678);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnSiginhere);
-            this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.regShowPassword);
             this.Controls.Add(this.regcPassword);
             this.Controls.Add(this.regPassword);
@@ -237,7 +234,6 @@
 
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.CheckBox regShowPassword;
         private System.Windows.Forms.TextBox regPassword;
         private System.Windows.Forms.TextBox textBox1;
@@ -249,5 +245,6 @@
         private System.Windows.Forms.TextBox regcPassword;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSiginhere;
+        private System.Windows.Forms.Button button1;
     }
 }

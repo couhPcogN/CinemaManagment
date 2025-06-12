@@ -16,5 +16,10 @@ namespace QuanLyVeXemPhim
         {
             InitializeComponent();
         }
+
+        private void BuyTickerForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

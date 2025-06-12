@@ -11,9 +11,10 @@ namespace QuanLyVeXemPhim
         private Label lblTitle, lblTotal;
         private Button btnContinue, btnBack, btnClose;
         private Dictionary<string, (Label lblQty, int price)> foodControls = new Dictionary<string, (Label, int)>();
-
-        public FoodSelectionForm(List<string> seatNames)
+        private Form parentForm;
+        public FoodSelectionForm(Form parent,List<string> seatNames)
         {
+            parentForm = parent;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Size = new Size(573, 559);
             this.BackColor = Color.HotPink;
@@ -162,6 +163,11 @@ namespace QuanLyVeXemPhim
             UpdateTotal();
         }
 
+        private void FoodSelectionForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void UpdateTotal()
         {
             int total = 0;
@@ -187,18 +193,16 @@ namespace QuanLyVeXemPhim
             );
 
             // Giả sử các thông tin phim/lịch chiếu được lưu tạm ở Program (nếu không thì lấy lại từ form trước đó)
-            PaymentForm payForm = new PaymentForm(Program.SelectedSeatsGlobal, selectedFoods)
+            PaymentForm payForm = new PaymentForm(this, Program.SelectedSeatsGlobal, selectedFoods)
             {
                 SelectedMovieName = Program.SelectedMovieName,
                 SelectedGenre = Program.SelectedGenre,
                 SelectedDuration = Program.SelectedDuration,
                 SelectedRoom = Program.SelectedRoom,
-                SelectedShowtime = Program.SelectedShowtime
+                SelectedShowtime = Program.SelectedShowtime,
+                BuyerName = Program.CurrentUserName,
+                BuyerPoints = Program.CurrentUserPoints
             };
-
-            // BỔ SUNG 2 DÒNG NÀY:
-            payForm.BuyerName = Program.CurrentUserName;      // Tên user hoặc staff đang đăng nhập
-            payForm.BuyerPoints = Program.CurrentUserPoints;  // Số điểm tích lũy hiện tại
 
             this.Hide();
             payForm.ShowDialog();

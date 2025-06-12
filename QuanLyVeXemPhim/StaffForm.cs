@@ -34,5 +34,22 @@ namespace QuanLyVeXemPhim
             DashboardForm dashboardForm = new DashboardForm("staff");
             dashboardForm.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Bạn có muốn đăng xuất không?",
+                "Xác nhận đăng xuất",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                Program.CurrentRole = string.Empty;
+                this.Close();
+            }
+            // Nếu chọn No thì không làm gì cả
+        }
     }
 }

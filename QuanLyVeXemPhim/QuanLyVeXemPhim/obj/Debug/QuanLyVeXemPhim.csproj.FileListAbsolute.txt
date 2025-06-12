@@ -47,3 +47,28 @@ D:\Thanh_OFFICIAL\test3\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhi
 D:\Thanh_OFFICIAL\test3\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.UserManagementForm.resources
 D:\Thanh_OFFICIAL\test3\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.csproj.GenerateResource.cache
 D:\Thanh_OFFICIAL\test3\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.csproj.CoreCompileInputs.cache
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\bin\Debug\images\cocacola.png
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\bin\Debug\images\pepsi.png
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\bin\Debug\images\popcorn.png
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\bin\Debug\images\sprite.png
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\bin\Debug\QuanLyVeXemPhim.exe.config
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\bin\Debug\QuanLyVeXemPhim.exe
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\bin\Debug\QuanLyVeXemPhim.pdb
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.csproj.AssemblyReference.cache
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.exe.config
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.AdminDashboardForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.AdminForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.DashboardForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.DoanhThuForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.LoginForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.MovieManagementForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.Properties.Resources.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.RegisterForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.SeatSelectionForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.StaffForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.UserForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.UserManagementForm.resources
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.csproj.GenerateResource.cache
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.csproj.CoreCompileInputs.cache
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.exe
+C:\Users\Phu Thanh\CinemaManagment\QuanLyVeXemPhim\QuanLyVeXemPhim\obj\Debug\QuanLyVeXemPhim.pdb

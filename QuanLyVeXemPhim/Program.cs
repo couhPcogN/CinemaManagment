@@ -19,34 +19,42 @@ namespace QuanLyVeXemPhim
         public static string SelectedDuration;
         public static string SelectedRoom;
         public static string SelectedShowtime;
+        public static string SelectedShowDate;
         public static List<string> SelectedSeatsGlobal = new List<string>();
 
         public static object LoginForm { get; internal set; }
-
+        public static string CurrentUsername { get; set; }
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // ✨ Mở form đăng nhập đầu tiên
-            LoginForm loginForm = new LoginForm();
-            Application.Run(loginForm);
+            while (true)
+            {
+                // Mở form đăng nhập
+                LoginForm loginForm = new LoginForm();
+                Application.Run(loginForm);
 
-            // ⏩ Nếu người dùng đã đăng nhập thành công (role đã set)
-            if (string.IsNullOrEmpty(CurrentRole)) return;
+                // Nếu không đăng nhập thành công (CurrentRole rỗng), thoát chương trình
+                if (string.IsNullOrEmpty(CurrentRole)) break;
 
-            if (CurrentRole == "admin")
-            {
-                Application.Run(new AdminForm(CurrentRole)); // truyền role vào AdminForm
-            }
-            else if (CurrentRole == "staff")
-            {
-                Application.Run(new StaffForm());
-            }
-            else if (CurrentRole == "user")
-            {
-                Application.Run(new DashboardForm());
+                // Mở form chính theo role
+                if (CurrentRole == "admin")
+                {
+                    Application.Run(new AdminForm(CurrentRole));
+                }
+                else if (CurrentRole == "staff")
+                {
+                    Application.Run(new StaffForm());
+                }
+                else if (CurrentRole == "user")
+                {
+                    Application.Run(new DashboardForm());
+                }
+
+                // Sau khi form chính đóng, reset lại role để quay lại đăng nhập
+                CurrentRole = string.Empty;
             }
         }
     }

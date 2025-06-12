@@ -17,18 +17,18 @@ namespace QuanLyVeXemPhim
         {
             txtPassword.UseSystemPasswordChar = !chkShowPassword.Checked;
         }
-        private int GetUserPoints(string username)
+        private int LayDiemTichLuyTuFile(string username)
         {
-            string pointsFilePath = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\DATA\user_points.csv"));
-            if (!File.Exists(pointsFilePath)) return 0;
+            string userFilePath = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\DATA\User.csv"));
+            if (!File.Exists(userFilePath)) return 0;
 
-            var lines = File.ReadAllLines(pointsFilePath).Skip(1);
+            var lines = File.ReadAllLines(userFilePath).Skip(1); // Bỏ dòng tiêu đề
             foreach (var line in lines)
             {
                 var parts = line.Split(',');
-                if (parts[0].Trim() == username)
+                if (parts.Length >= 4 && parts[0].Trim() == username)
                 {
-                    if (int.TryParse(parts[1], out int points))
+                    if (int.TryParse(parts[3], out int points))
                         return points;
                     return 0;
                 }
@@ -40,7 +40,7 @@ namespace QuanLyVeXemPhim
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
             Program.CurrentUserName = txtUsername.Text;
-            Program.CurrentUserPoints = GetUserPoints(txtUsername.Text); // Đọc điểm từ file mới
+            Program.CurrentUserPoints = LayDiemTichLuyTuFile(txtUsername.Text);
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {

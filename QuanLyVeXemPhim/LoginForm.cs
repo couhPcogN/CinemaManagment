@@ -19,7 +19,7 @@ namespace QuanLyVeXemPhim
         }
         private int LayDiemTichLuyTuFile(string username)
         {
-            string filePath = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\DATA\user.csv"));
+            string filePath = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\DATA\user_points.csv"));
             if (!File.Exists(filePath)) return 0;
             var lines = File.ReadAllLines(filePath);
             foreach (var line in lines.Skip(1))
@@ -86,8 +86,9 @@ namespace QuanLyVeXemPhim
         private void btnRegister_Click(object sender, EventArgs e)
         {
             RegisterForm register = new RegisterForm();
-            register.Show();
             this.Hide();
+            register.ShowDialog();
+            this.Show();
         }
 
         //private void btnRegister_Click_1(object sender, EventArgs e)
@@ -99,7 +100,15 @@ namespace QuanLyVeXemPhim
 
         private void chkShowPassword_CheckedChanged_1(object sender, EventArgs e)
         {
-
+            // Khi checkbox được check, hiển thị password rõ
+            if (chkShowPassword.Checked)
+            {
+                txtPassword.UseSystemPasswordChar = false;
+            }
+            else // khi bỏ check, ẩn password
+            {
+                txtPassword.UseSystemPasswordChar = true;
+            }
         }
 
         private void btnSignuphere(object sender, EventArgs e)

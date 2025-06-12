@@ -1,4 +1,8 @@
-Username,Password,Role
-Thanh,123,user
-admin,123,admin
-staff,123,staff
+Username,Password,Role,Points
+Thanh,123,user,0
+admin,123,admin,0
+staff,123,staff,0
+user1,123,user,0
+user123,123,user,0
+user2,123,user,0
+Chien,123,user,0

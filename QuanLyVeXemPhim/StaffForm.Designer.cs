@@ -52,8 +52,8 @@
             this.picSearch = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnBuyTickets = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -83,12 +83,13 @@
             this.button1.BackColor = System.Drawing.Color.PowderBlue;
             this.button1.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(12, 627);
+            this.button1.Location = new System.Drawing.Point(12, 595);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(173, 48);
             this.button1.TabIndex = 4;
             this.button1.Text = "Log Out";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox2
             // 
@@ -331,14 +332,6 @@
             this.panel1.Size = new System.Drawing.Size(222, 724);
             this.panel1.TabIndex = 36;
             // 
-            // txtSearch
-            // 
-            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtSearch.Location = new System.Drawing.Point(506, 11);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(617, 32);
-            this.txtSearch.TabIndex = 35;
-            // 
             // btnBuyTickets
             // 
             this.btnBuyTickets.BackColor = System.Drawing.Color.LightBlue;
@@ -352,6 +345,14 @@
             this.btnBuyTickets.Text = "Buy Tickets";
             this.btnBuyTickets.UseVisualStyleBackColor = false;
             this.btnBuyTickets.Click += new System.EventHandler(this.btnBuyTickets_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtSearch.Location = new System.Drawing.Point(506, 11);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(617, 32);
+            this.txtSearch.TabIndex = 35;
             // 
             // StaffForm
             // 

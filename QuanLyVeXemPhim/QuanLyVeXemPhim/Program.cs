@@ -20,6 +20,7 @@ namespace QuanLyVeXemPhim
         public static string SelectedRoom;
         public static string SelectedShowtime;
         public static List<string> SelectedSeatsGlobal = new List<string>();
+        public static string SelectedShowDate;
 
         public static object LoginForm { get; internal set; }
 

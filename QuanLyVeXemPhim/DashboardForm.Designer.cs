@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,8 +50,8 @@
             this.lblRoom = new System.Windows.Forms.Label();
             this.lblShowtime = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnback = new System.Windows.Forms.Button();
+            this.dtpShowDate = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSearch)).BeginInit();
@@ -80,6 +81,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(222, 724);
             this.panel1.TabIndex = 2;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.LightBlue;
+            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button2.Location = new System.Drawing.Point(12, 203);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(191, 50);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Welcome User";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.UseVisualStyleBackColor = false;
             // 
             // btnLogout
             // 
@@ -245,7 +260,7 @@
             "Phòng 2",
             "Phòng 3",
             "Phòng 4"});
-            this.comboBoxRoom.Location = new System.Drawing.Point(1270, 409);
+            this.comboBoxRoom.Location = new System.Drawing.Point(1270, 403);
             this.comboBoxRoom.Name = "comboBoxRoom";
             this.comboBoxRoom.Size = new System.Drawing.Size(121, 37);
             this.comboBoxRoom.TabIndex = 15;
@@ -260,7 +275,7 @@
             "15:00 – 17:00",
             "18:00 – 20:50",
             "21:00 – 23:10"});
-            this.comboBoxShowtime.Location = new System.Drawing.Point(1270, 456);
+            this.comboBoxShowtime.Location = new System.Drawing.Point(1270, 450);
             this.comboBoxShowtime.Name = "comboBoxShowtime";
             this.comboBoxShowtime.Size = new System.Drawing.Size(121, 37);
             this.comboBoxShowtime.TabIndex = 16;
@@ -271,7 +286,7 @@
             this.lblRoom.BackColor = System.Drawing.Color.LightBlue;
             this.lblRoom.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRoom.ForeColor = System.Drawing.Color.Black;
-            this.lblRoom.Location = new System.Drawing.Point(1163, 409);
+            this.lblRoom.Location = new System.Drawing.Point(1163, 403);
             this.lblRoom.Name = "lblRoom";
             this.lblRoom.Size = new System.Drawing.Size(73, 29);
             this.lblRoom.TabIndex = 17;
@@ -283,7 +298,7 @@
             this.lblShowtime.BackColor = System.Drawing.Color.LightBlue;
             this.lblShowtime.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblShowtime.ForeColor = System.Drawing.Color.Black;
-            this.lblShowtime.Location = new System.Drawing.Point(1121, 456);
+            this.lblShowtime.Location = new System.Drawing.Point(1121, 450);
             this.lblShowtime.Name = "lblShowtime";
             this.lblShowtime.Size = new System.Drawing.Size(115, 29);
             this.lblShowtime.TabIndex = 18;
@@ -300,20 +315,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.LightBlue;
-            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.Location = new System.Drawing.Point(12, 203);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(191, 50);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Welcome User";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.UseVisualStyleBackColor = false;
-            // 
             // btnback
             // 
             this.btnback.BackColor = System.Drawing.Color.LightBlue;
@@ -326,6 +327,16 @@
             this.btnback.UseVisualStyleBackColor = false;
             this.btnback.Click += new System.EventHandler(this.btnback_Click);
             // 
+            // dtpShowDate
+            // 
+            this.dtpShowDate.CalendarMonthBackground = System.Drawing.Color.White;
+            this.dtpShowDate.CalendarTitleBackColor = System.Drawing.Color.LightBlue;
+            this.dtpShowDate.Font = new System.Drawing.Font("Comic Sans MS", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpShowDate.Location = new System.Drawing.Point(1117, 493);
+            this.dtpShowDate.Name = "dtpShowDate";
+            this.dtpShowDate.Size = new System.Drawing.Size(274, 35);
+            this.dtpShowDate.TabIndex = 21;
+            // 
             // DashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -333,6 +344,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1460, 724);
+            this.Controls.Add(this.dtpShowDate);
             this.Controls.Add(this.btnback);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblShowtime);
@@ -390,5 +402,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnback;
+        private System.Windows.Forms.DateTimePicker dtpShowDate;
     }
 }

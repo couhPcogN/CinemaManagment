@@ -78,18 +78,39 @@ namespace QuanLyVeXemPhim
                 return;
             }
 
+            // Kiểm tra trùng lịch chiếu
+            if (IsShowtimeOverlapping(room, showDate, showtime, dur))
+            {
+                MessageBox.Show("Lịch chiếu bị trùng hoặc không đủ thời gian giãn cách 15 phút!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // Thêm vào DataGridView
             dgvMovies.Rows.Add(movieID, movieName, genre, dur.ToString(), showDate, room, showtime);
 
             try
             {
-                // Đường dẫn tuyệt đối theo bạn
-                string baseDir = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\DATA"));
-                string pathMovies = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\DATA\movies.csv"));
-                string pathDetails = Path.GetFullPath(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"..\..\DATA\movies_detail.csv"));
+                // Đường dẫn tuyệt đối
+                string baseDir = Path.Combine(Application.StartupPath, "DATA");
+                string pathMovies = Path.Combine(baseDir, "movies.csv");
+                string pathDetails = Path.Combine(baseDir, "movies_detail.csv");
 
                 // Tạo thư mục nếu chưa có
                 Directory.CreateDirectory(baseDir);
+
+                // Kiểm tra và tạo file movies.csv nếu chưa tồn tại
+                if (!File.Exists(pathMovies))
+                {
+                    string headerMovies = "MovieID,MovieName,Genre,Duration,ImagePath";
+                    File.WriteAllText(pathMovies, headerMovies + Environment.NewLine);
+                }
+
+                // Kiểm tra và tạo file movies_detail.csv nếu chưa tồn tại
+                if (!File.Exists(pathDetails))
+                {
+                    string headerDetails = "MovieID,MovieName,Genre,Duration,ShowDate,Room,Showtime";
+                    File.WriteAllText(pathDetails, headerDetails + Environment.NewLine);
+                }
 
                 // Ghi vào movies.csv (5 cột)
                 string[] rowBasic = { movieID, movieName, genre, dur.ToString(), imagePath };
@@ -103,11 +124,10 @@ namespace QuanLyVeXemPhim
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi ghi file: " + ex.Message, "Lỗi");
+                MessageBox.Show("Lỗi khi ghi file: " + ex.Message + "\nĐường dẫn: " + Application.StartupPath, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             ClearForm();
-           // txtMovieID.Text = GenerateMovieID();
         }
 
 
@@ -346,5 +366,62 @@ namespace QuanLyVeXemPhim
         {
 
         }
+
+        // ... existing code ...
+
+        private bool IsShowtimeOverlapping(string room, string showDate, string newShowtime, int duration)
+        {
+            try
+            {
+                // Parse the new showtime
+                string[] timeParts = newShowtime.Split('-');
+                if (timeParts.Length != 2) return false;
+
+                DateTime newStartTime = DateTime.Parse(timeParts[0].Trim());
+                DateTime newEndTime = DateTime.Parse(timeParts[1].Trim());
+
+                // Add 15 minutes buffer
+                newStartTime = newStartTime.AddMinutes(15);
+                newEndTime = newEndTime.AddMinutes(-15);
+
+                // Check against existing showtimes in the same room and date
+                foreach (DataGridViewRow row in dgvMovies.Rows)
+                {
+                    if (row.Cells[5].Value?.ToString() == room && // Room matches
+                        row.Cells[4].Value?.ToString() == showDate) // Date matches
+                    {
+                        string existingShowtime = row.Cells[6].Value?.ToString();
+                        if (string.IsNullOrEmpty(existingShowtime)) continue;
+
+                        string[] existingTimeParts = existingShowtime.Split('-');
+                        if (existingTimeParts.Length != 2) continue;
+
+                        DateTime existingStartTime = DateTime.Parse(existingTimeParts[0].Trim());
+                        DateTime existingEndTime = DateTime.Parse(existingTimeParts[1].Trim());
+
+                        // Add 15 minutes buffer to existing showtime
+                        existingStartTime = existingStartTime.AddMinutes(15);
+                        existingEndTime = existingEndTime.AddMinutes(-15);
+
+                        // Check for overlap
+                        if ((newStartTime >= existingStartTime && newStartTime < existingEndTime) ||
+                            (newEndTime > existingStartTime && newEndTime <= existingEndTime) ||
+                            (newStartTime <= existingStartTime && newEndTime >= existingEndTime))
+                        {
+                            return true; // Overlapping found
+                        }
+                    }
+                }
+                return false; // No overlap found
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi kiểm tra trùng lịch chiếu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true; // Return true to prevent adding in case of error
+            }
+        }
+
+        // ... existing code ...
     }
 }
+

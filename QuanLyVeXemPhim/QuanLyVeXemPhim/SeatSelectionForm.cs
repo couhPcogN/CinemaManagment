@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.IO;
 
 namespace QuanLyVeXemPhim
 {
     public partial class SeatSelectionForm : Form
     {
         private bool isFoodFormOpened = false;
-
         private List<Button> selectedSeats = new List<Button>();
         private Dictionary<string, string> seatTypes = new Dictionary<string, string>();
-        private List<string> bookedSeats = new List<string> { "B03", "C05", "D06", "E04", "F05" }; // đã đặt
+        private List<BookedSeat> bookedSeats = new List<BookedSeat>(); // Danh sách ghế đã đặt
 
         private readonly Dictionary<string, int> seatPrices = new Dictionary<string, int>()
         {
@@ -26,6 +26,16 @@ namespace QuanLyVeXemPhim
         private Label lblTotal;
         private Button btnBack, btnContinue;
 
+        // Class để lưu thông tin ghế đã đặt
+        private class BookedSeat
+        {
+            public string MovieName { get; set; }
+            public string ShowDate { get; set; }
+            public string Room { get; set; }
+            public string Seat { get; set; }
+            public string Showtime { get; set; }
+        }
+
         public SeatSelectionForm()
         {
             this.FormBorderStyle = FormBorderStyle.None;
@@ -35,6 +45,7 @@ namespace QuanLyVeXemPhim
             this.Font = new Font("Comic Sans MS", 9, FontStyle.Bold);
 
             InitializeControls();
+            LoadBookedSeats();
             GenerateSeats();
         }
 
@@ -110,6 +121,96 @@ namespace QuanLyVeXemPhim
             this.Controls.Add(lbl);
         }
 
+        private void LoadBookedSeats()
+        {
+            try
+            {
+                string filePath = Path.Combine(Application.StartupPath, "DATA", "booked_seats.csv");
+                if (File.Exists(filePath))
+                {
+                    string[] lines = File.ReadAllLines(filePath);
+                    foreach (string line in lines.Skip(1)) // Bỏ qua dòng header
+                    {
+                        string[] parts = line.Split(',');
+                        if (parts.Length >= 5) // MovieName,ShowDate,Room,Seat,Showtime
+                        {
+                            var bookedSeat = new BookedSeat
+                            {
+                                MovieName = parts[0],
+                                ShowDate = parts[1],
+                                Room = parts[2],
+                                Seat = parts[3],
+                                Showtime = parts[4]
+                            };
+                            // Chỉ thêm vào nếu suất chiếu chưa kết thúc (cộng thêm 20 phút dọn dẹp)
+                            if (!IsShowtimeEnded(bookedSeat.ShowDate, bookedSeat.Showtime))
+                            {
+                                bookedSeats.Add(bookedSeat);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi đọc danh sách ghế đã đặt: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool IsShowtimeEnded(string showDate, string showtime)
+        {
+            try
+            {
+                // Parse ngày chiếu
+                DateTime date = DateTime.Parse(showDate);
+                // Parse thời gian kết thúc từ showtime (ví dụ: "17:00-19:00" -> lấy "19:00")
+                string endTimeStr = showtime.Split('-')[1].Trim();
+                DateTime endTime = DateTime.Parse(endTimeStr);
+                // Gộp ngày chiếu và giờ kết thúc
+                DateTime showEnd = new DateTime(date.Year, date.Month, date.Day, endTime.Hour, endTime.Minute, 0);
+                // Thêm 20 phút dọn dẹp
+                showEnd = showEnd.AddMinutes(20);
+                // So sánh với thời gian hiện tại
+                return DateTime.Now > showEnd;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private void SaveBookedSeats()
+        {
+            try
+            {
+                string filePath = Path.Combine(Application.StartupPath, "DATA", "booked_seats.csv");
+                string directory = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+                // Tạo header nếu file chưa tồn tại
+                if (!File.Exists(filePath))
+                {
+                    File.WriteAllText(filePath, "MovieName,ShowDate,Room,Seat,Showtime\n");
+                }
+                // Lưu các ghế đã chọn
+                foreach (Button seat in selectedSeats)
+                {
+                    string line = $"{Program.SelectedMovieName}," +
+                                $"{Program.SelectedShowDate}," +
+                                $"{Program.SelectedRoom}," +
+                                $"{seat.Text}," +
+                                $"{Program.SelectedShowtime}\n";
+                    File.AppendAllText(filePath, line);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu danh sách ghế đã đặt: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void GenerateSeats()
         {
             string[] rows = { "A", "B", "C", "D", "E", "F", "G" };
@@ -145,7 +246,15 @@ namespace QuanLyVeXemPhim
 
                     seatTypes[seatName] = type;
 
-                    if (bookedSeats.Contains(seatName))
+                    // Kiểm tra ghế đã đặt đúng phim/ngày/phòng/suất chiếu
+                    bool isBooked = bookedSeats.Any(s =>
+                        s.MovieName == Program.SelectedMovieName &&
+                        s.ShowDate == Program.SelectedShowDate &&
+                        s.Room == Program.SelectedRoom &&
+                        s.Seat == seatName &&
+                        s.Showtime == Program.SelectedShowtime);
+
+                    if (isBooked)
                     {
                         btn.BackColor = Color.Gray;
                         btn.ForeColor = Color.White;
@@ -153,18 +262,16 @@ namespace QuanLyVeXemPhim
                         btn.FlatStyle = FlatStyle.Flat;
                         btn.FlatAppearance.BorderSize = 0;
                     }
-
                     else
                     {
                         btn.BackColor = GetColorByType(type);
-                        btn.Click += Seat_Click; // chỉ gán nếu chưa đặt
+                        btn.Click += Seat_Click;
                     }
 
                     panelSeats.Controls.Add(btn);
                 }
             }
         }
-
 
         private void Seat_Click(object sender, EventArgs e)
         {
@@ -209,16 +316,16 @@ namespace QuanLyVeXemPhim
                 return;
             }
 
+            // Lưu ghế đã chọn
+            SaveBookedSeats();
+
             // Lưu ghế vào biến toàn cục
             Program.SelectedSeatsGlobal = selectedSeats.Select(b => b.Text).ToList();
-
 
             // Mở FoodSelectionForm và ẩn luôn SeatForm
             FoodSelectionForm foodForm = new FoodSelectionForm(Program.SelectedSeatsGlobal);
             foodForm.Show();
-            this.Hide(); // KHÔNG mở lại sau này nữa
+            this.Hide();
         }
-
-
     }
 }
